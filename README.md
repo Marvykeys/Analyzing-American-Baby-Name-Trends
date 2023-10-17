@@ -108,8 +108,6 @@ GROUP BY first_name
 ORDER BY first_name
 LIMIT 10;
 ```
-
-
 <table>
     <thead>
         <tr>
@@ -172,7 +170,6 @@ LIMIT 10;
         <tr>
 
 
-
 #### 3. Let's take a look at the ten highest-ranked American female names in our dataset.
 ```Python
 %%sql
@@ -185,8 +182,6 @@ WHERE sex = 'F'
 GROUP BY first_name
 LIMIT 10;
 ```
-
-
 <table>
     <thead>
         <tr>
