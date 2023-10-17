@@ -37,9 +37,6 @@
 
 #### 1. Let's find names that have been given to over 5,000 babies of either sex every year for 101 years from 1920 through 2020.
 ```Python
-%%sql
-postgresql:///names
-    
 SELECT first_name,
        SUM(num)
 FROM baby_names
@@ -47,56 +44,13 @@ GROUP BY first_name
 HAVING COUNT(year) = 101
 ORDER BY SUM(num) DESC;
 ```
-
-
-<table>
-    <thead>
-        <tr>
-            <th>first_name</th>
-            <th>sum</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td>James</td>
-            <td>4748138</td>
-        </tr>
-        <tr>
-            <td>John</td>
-            <td>4510721</td>
-        </tr>
-        <tr>
-            <td>William</td>
-            <td>3614424</td>
-        </tr>
-        <tr>
-            <td>David</td>
-            <td>3571498</td>
-        </tr>
-        <tr>
-            <td>Joseph</td>
-            <td>2361382</td>
-        </tr>
-        <tr>
-            <td>Thomas</td>
-            <td>2166802</td>
-        </tr>
-        <tr>
-            <td>Charles</td>
-            <td>2112352</td>
-        </tr>
-        <tr>
-            <td>Elizabeth</td>
-            <td>1436286</td>
-        </tr>
-    </tbody>
-</table>
-
-
+| first_nam   |  sum    |
+|-------------|---------|
+|   James     | 4748138 |
+|   James     | 4748138 |
 
 #### 2. Let's classify each name's popularity according to the number of years that the name appears in the dataset.
 ```Python
-%%sql
 SELECT first_name, SUM(num),
    CASE WHEN COUNT(num) > 80 THEN 'Classic'
         WHEN COUNT(num) > 50 THEN 'Semi-classic'
@@ -107,48 +61,16 @@ GROUP BY first_name
 ORDER BY first_name
 LIMIT 5;
 ```
-<table>
-    <thead>
-        <tr>
-            <th>first_name</th>
-            <th>sum</th>
-            <th>popularity_type</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td>Aaliyah</td>
-            <td>15870</td>
-            <td>Trendy</td>
-        </tr>
-        <tr>
-            <td>Aaron</td>
-            <td>530592</td>
-            <td>Semi-classic</td>
-        </tr>
-        <tr>
-            <td>Abigail</td>
-            <td>338485</td>
-            <td>Semi-trendy</td>
-        </tr>
-        <tr>
-            <td>Adam</td>
-            <td>497293</td>
-            <td>Semi-trendy</td>
-        </tr>
-        <tr>
-            <td>Addison</td>
-            <td>107433</td>
-            <td>Trendy</td>
-        </tr>
-        <tr>
-
-
+| first_nam   |  sum    |  sum    |
+|-------------|---------|---------|
+|   James     | 4748138 |         |
+|   James     | 4748138 |         |
+|   James     | 4748138 |         |
+|   James     | 4748138 |         |
+|   James     | 4748138 |         |
 
 #### 3. Let's take a look at the ten highest-ranked American female names in our dataset.
 ```Python
-%%sql
-
 SELECT
     RANK() OVER(ORDER BY SUM(num) DESC) AS name_rank,
     first_name, SUM(num)
@@ -193,13 +115,8 @@ LIMIT 5;
         </tr>
         <tr>
 
-
-
-
 #### 4. We will return a list of female first names which ends with the letter 'a' and has been popular in the years since 2015.
 ```Python
-%%sql
-
 SELECT first_name
 FROM baby_names
 WHERE sex = 'F' 
@@ -208,8 +125,6 @@ AND first_name LIKE '%a'
 GROUP BY first_name
 ORDER BY SUM(num) DESC;
 ```
-
-
 <table>
     <thead>
         <tr>
@@ -277,19 +192,14 @@ ORDER BY SUM(num) DESC;
     </tbody>
 </table>
 
-
-
 #### 5. Using a window function, we will find the cumulative number of babies named Olivia over the years since the name first appeared in our dataset.
 ```Python
-%%sql
-
 SELECT year, first_name, num,
        SUM(num) OVER (ORDER BY year) AS cumulative_olivias
 FROM baby_names
 WHERE first_name = 'Olivia'
 ORDER BY year ASC;
 ```
-
 
 <table>
     <thead>
@@ -484,12 +394,8 @@ ORDER BY year ASC;
     </tbody>
 </table>
 
-
-
 #### 6. Let's write a query that selects the year and the maximum num of babies given any male name in that year.
 ```Python
-%%sql
-
 SELECT year, 
        MAX(num) AS max_num
 FROM baby_names
@@ -497,6 +403,7 @@ WHERE sex = 'M'
 GROUP BY year
 LIMIT 5;
 ```
+
 <table>
     <thead>
         <tr>
@@ -527,12 +434,8 @@ LIMIT 5;
         </tr>
         <tr>
 
-
-
 #### 7. Using the previous task's code as a subquery, we will look up the first_name that corresponds to the maximum number of babies given a specific male name in a year.
 ```Python
-%%sql
-
 SELECT b.year, b.first_name, b.num
 
 FROM baby_names AS b
@@ -547,7 +450,6 @@ ON subquery.year = b.year AND subquery.max_num = b.num
 ORDER BY year DESC
 LIMIT 5;
 ```
-
 
 <table>
     <thead>
@@ -585,11 +487,8 @@ LIMIT 5;
         </tr>
         <tr>
 
-          
 #### 8. Let's Return a list of first names that have been the top male first name in any year along with a count of the number of years that name has been the top name.
 ```Python
-%%sql
-
 WITH top_male_names AS (SELECT b.year, b.first_name, b.num
 
 FROM baby_names AS b
@@ -609,7 +508,6 @@ FROM top_male_names
 GROUP BY first_name
 ORDER BY COUNT(first_name) DESC;
 ```
-
 
 <table>
     <thead>
