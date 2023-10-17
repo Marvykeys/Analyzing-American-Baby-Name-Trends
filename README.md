@@ -106,7 +106,7 @@ SELECT first_name, SUM(num),
 FROM baby_names
 GROUP BY first_name
 ORDER BY first_name
-LIMIT 10;
+LIMIT 5;
 ```
 <table>
     <thead>
@@ -143,31 +143,7 @@ LIMIT 10;
             <td>Trendy</td>
         </tr>
         <tr>
-            <td>Adrian</td>
-            <td>147741</td>
-            <td>Semi-trendy</td>
-        </tr>
-        <tr>
-            <td>Aidan</td>
-            <td>68566</td>
-            <td>Trendy</td>
-        </tr>
-        <tr>
-            <td>Aiden</td>
-            <td>216194</td>
-            <td>Trendy</td>
-        </tr>
-        <tr>
-            <td>Alan</td>
-            <td>162041</td>
-            <td>Semi-trendy</td>
-        </tr>
-        <tr>
-            <td>Albert</td>
-            <td>260945</td>
-            <td>Semi-trendy</td>
-        </tr>
-        <tr>
+
 
 
 #### 3. Let's take a look at the ten highest-ranked American female names in our dataset.
@@ -180,7 +156,7 @@ SELECT
 FROM baby_names
 WHERE sex = 'F'
 GROUP BY first_name
-LIMIT 10;
+LIMIT 5;
 ```
 <table>
     <thead>
@@ -217,32 +193,7 @@ LIMIT 10;
             <td>1361021</td>
         </tr>
         <tr>
-            <td>6</td>
-            <td>Barbara</td>
-            <td>1343901</td>
-        </tr>
-        <tr>
-            <td>7</td>
-            <td>Susan</td>
-            <td>1025728</td>
-        </tr>
-        <tr>
-            <td>8</td>
-            <td>Jessica</td>
-            <td>994210</td>
-        </tr>
-        <tr>
-            <td>9</td>
-            <td>Lisa</td>
-            <td>920119</td>
-        </tr>
-        <tr>
-            <td>10</td>
-            <td>Betty</td>
-            <td>893396</td>
-        </tr>
-    </tbody>
-</table>
+
 
 
 
