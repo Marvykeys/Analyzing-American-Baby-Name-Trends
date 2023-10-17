@@ -97,7 +97,6 @@ ORDER BY SUM(num) DESC;
 #### 2. Let's classify each name's popularity according to the number of years that the name appears in the dataset.
 ```Python
 %%sql
-
 SELECT first_name, SUM(num),
    CASE WHEN COUNT(num) > 80 THEN 'Classic'
         WHEN COUNT(num) > 50 THEN 'Semi-classic'
