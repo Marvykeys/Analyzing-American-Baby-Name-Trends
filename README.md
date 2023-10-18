@@ -1,5 +1,6 @@
-# Analyzing-American-Baby-Name-Trends
-<p>We'll be working with data provided by the United States Social Security Administration, which lists first names along with the number and sex of babies they were given to in each year. We've limited the dataset to first names which were given to over 5,000 American babies in a given year. Our data spans 101 years, from 1920 through 2020.</p>
+# Analyzing-American-Baby-Name-Trends :baby:
+I'll be working with data provided by the United States Social Security Administration, which lists first names along with the number and sex of babies they were given to in each year. The dataset has been limited to the first names which were given to over 5,000 American babies in a given year. The data spans 101 years, from 1920 through 2020.
+
 <h3 id="baby_names"><code>baby_names</code></h3>
 <table>
 <thead>
@@ -46,8 +47,14 @@ ORDER BY SUM(num) DESC;
 ```
 | first_nam   |  sum    |
 |-------------|---------|
-|   James     | 4748138 |
-|   James     | 4748138 |
+|  James 	| 4748138 |
+|  John 	| 4510721 |
+|  William 	| 3614424 |
+|  David 	| 3571498 |
+|  Joseph 	| 2361382 |
+|  Thomas 	| 2166802 |
+|  Charles 	| 2112352 |
+|  Elizabeth 	| 1436286 |
 
 #### 2. Let's classify each name's popularity according to the number of years that the name appears in the dataset.
 ```Python
@@ -61,13 +68,13 @@ GROUP BY first_name
 ORDER BY first_name
 LIMIT 5;
 ```
-| first_nam   |  sum    |  sum    |
-|-------------|---------|---------|
-|   James     | 4748138 |         |
-|   James     | 4748138 |         |
-|   James     | 4748138 |         |
-|   James     | 4748138 |         |
-|   James     | 4748138 |         |
+| first_nam   |  sum    |popularity type|
+|-------------|---------|---------------|
+|  Aaliyah 	|  15870  |	  Trendy    |
+|  Aaron 	| 530592  |  Semi-classic |
+|  Abigail    | 338485  |  Semi-trendy  |
+|  Adam 	| 497293  |  Semi-trendy  |
+|  Addison 	| 107433  |  Trendy       |
 
 #### 3. Let's take a look at the ten highest-ranked American female names in our dataset.
 ```Python
@@ -79,41 +86,13 @@ WHERE sex = 'F'
 GROUP BY first_name
 LIMIT 5;
 ```
-<table>
-    <thead>
-        <tr>
-            <th>name_rank</th>
-            <th>first_name</th>
-            <th>sum</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td>1</td>
-            <td>Mary</td>
-            <td>3215850</td>
-        </tr>
-        <tr>
-            <td>2</td>
-            <td>Patricia</td>
-            <td>1479802</td>
-        </tr>
-        <tr>
-            <td>3</td>
-            <td>Elizabeth</td>
-            <td>1436286</td>
-        </tr>
-        <tr>
-            <td>4</td>
-            <td>Jennifer</td>
-            <td>1404743</td>
-        </tr>
-        <tr>
-            <td>5</td>
-            <td>Linda</td>
-            <td>1361021</td>
-        </tr>
-        <tr>
+| name_rank   |  first_name |   Sum     |
+|-------------|-------------|-----------|
+|     1 	|  Mary 	|  3215850  |
+|     2 	|  Patricia 	|  1479802  |
+|     3 	|  Elizabeth 	|  1436286  |
+|     4 	|  Jennifer 	|  1404743  | 
+|     5 	|  Linda 	|  1361021  |
 
 #### 4. We will return a list of female first names which ends with the letter 'a' and has been popular in the years since 2015.
 ```Python
@@ -403,36 +382,13 @@ WHERE sex = 'M'
 GROUP BY year
 LIMIT 5;
 ```
-
-<table>
-    <thead>
-        <tr>
-            <th>year</th>
-            <th>max_num</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td>1970</td>
-            <td>85291</td>
-        </tr>
-        <tr>
-            <td>2000</td>
-            <td>34483</td>
-        </tr>
-        <tr>
-            <td>1947</td>
-            <td>94764</td>
-        </tr>
-        <tr>
-            <td>1962</td>
-            <td>85041</td>
-        </tr>
-        <tr>
-            <td>1975</td>
-            <td>68451</td>
-        </tr>
-        <tr>
+|year |max_num|
+|-----|-------|
+|1970 |85291  |
+|2000 |34483  |
+|1947 |94764  |
+|1962 |85041  |
+|1975 |68451  |
 
 #### 7. Using the previous task's code as a subquery, we will look up the first_name that corresponds to the maximum number of babies given a specific male name in a year.
 ```Python
@@ -450,42 +406,13 @@ ON subquery.year = b.year AND subquery.max_num = b.num
 ORDER BY year DESC
 LIMIT 5;
 ```
-
-<table>
-    <thead>
-        <tr>
-            <th>year</th>
-            <th>first_name</th>
-            <th>num</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td>2020</td>
-            <td>Liam</td>
-            <td>19659</td>
-        </tr>
-        <tr>
-            <td>2019</td>
-            <td>Liam</td>
-            <td>20555</td>
-        </tr>
-        <tr>
-            <td>2018</td>
-            <td>Liam</td>
-            <td>19924</td>
-        </tr>
-        <tr>
-            <td>2017</td>
-            <td>Liam</td>
-            <td>18824</td>
-        </tr>
-        <tr>
-            <td>2016</td>
-            <td>Noah</td>
-            <td>19154</td>
-        </tr>
-        <tr>
+|year|first_name|num|
+|----|------|------|
+|2020| Liam | 19659|
+|2019| Liam | 20555|
+|2018| Liam |	19924|
+|2017| Liam | 18824|
+|2016| Noah |	19154|
 
 #### 8. Let's Return a list of first names that have been the top male first name in any year along with a count of the number of years that name has been the top name.
 ```Python
